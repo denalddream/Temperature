@@ -3,14 +3,14 @@ j = webread(url);
 
 cc = j.current_condition(1);
 
-tempC         = str2double(cc.temp_C);               % C
+tempC         = str2double(cc.temp_C);
 feelsLikeC    = str2double(cc.FeelsLikeC);           % C
 humidityPct   = str2double(cc.humidity);             % %
 pressure_hPa  = str2double(cc.pressure);             % гПа
 pressure_mmHg = pressure_hPa * 0.75006156;           % мм рт. ст.
-windSpeed_ms  = str2double(cc.windspeedKmph) / 3.6;  % м/с
-windDeg       = str2double(cc.winddirDegree);        % deg
-cloudinessPct = str2double(cc.cloudcover);           % %
+windSpeed_ms  = str2double(cc.windspeedKmph) / 3.6;
+windDeg       = str2double(cc.winddirDegree);
+cloudinessPct = str2double(cc.cloudcover);
 description   = string(cc.weatherDesc(1).value);
 astr          = j.weather(1).astronomy(1);
 sunriseLocal  = datetime(string(astr.sunrise), 'InputFormat','hh:mm a', 'TimeZone','Europe/Moscow');

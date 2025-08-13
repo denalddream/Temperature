@@ -1,20 +1,34 @@
-url = "https://wttr.in/Moscow?format=j1&lang=ru";
+% Параметры запроса
+apiKey = '3befcfd2478967d4a4d281df93942809';
+lat = 55.7558;
+lon = 37.6173;
+units = 'metric';
+lang = 'ru';
+
+% URL запрос
+url = sprintf('https://api.openweathermap.org/data/2.5/weather?lat=%.4f&lon=%.4f&appid=%s&units=%s&lang=%s', ...
+    lat, lon, apiKey, units, lang);
 j = webread(url);
 
-cc = j.current_condition(1);
+% Разбир данных
+tempC         = j.main.temp;                    % °C
+humidityPct   = j.main.humidity;                % %
+pressure_hPa  = j.main.pressure;                % гПа
+pressure_mmHg = j.main.pressure * 0.75006156;   % мм рт. ст.
+windSpeed_ms  = j.wind.speed;                   % м/с
+windDeg       = j.wind.deg;                     % градусы
+cloudinessPct = j.clouds.all;                   % %
+city          = j.name;
+sunriseUTC    = datetime(j.sys.sunrise, 'ConvertFrom','posixtime', 'TimeZone','UTC');
+sunsetUTC     = datetime(j.sys.sunset,  'ConvertFrom','posixtime', 'TimeZone','UTC');
+sunriseLocal  = datetime(sunriseUTC, 'TimeZone','Europe/Moscow');
+sunsetLocal   = datetime(sunsetUTC,  'TimeZone','Europe/Moscow');
 
-tempC         = str2double(cc.temp_C);               % C
-feelsLikeC    = str2double(cc.FeelsLikeC);           % C
-humidityPct   = str2double(cc.humidity);             % %
-pressure_hPa  = str2double(cc.pressure);             % гПа
-pressure_mmHg = pressure_hPa * 0.75006156;           % мм рт. ст.
-windSpeed_ms  = str2double(cc.windspeedKmph) / 3.6;  % м/с
-windDeg       = str2double(cc.winddirDegree);        % deg
-cloudinessPct = str2double(cc.cloudcover);           % %
-description   = string(cc.weatherDesc(1).value);
-astr          = j.weather(1).astronomy(1);
-sunriseLocal  = datetime(string(astr.sunrise), 'InputFormat','hh:mm a', 'TimeZone','Europe/Moscow');
-sunsetLocal   = datetime(string(astr.sunset),  'InputFormat','hh:mm a', 'TimeZone','Europe/Moscow');
-
-fprintf("Москва: %s, %.1f°C (ощущается %.1f°C), влажн. %d%%, давл. %.0f мм рт. ст., ветер %.1f м/с, %d°, облачн. %d%%\n", ...
-    description, tempC, feelsLikeC, humidityPct, pressure_mmHg, windSpeed_ms, windDeg, cloudinessPct);
+% Вывод
+fprintf("%s:\n " + ...
+    "Температура: %.1f°C,\n " + ...
+    "Влажность:   %d%%,\n " + ...
+    "Давление:    %.0f мм рт. ст.,\n " + ...
+    "Ветер:       %.1f м/с, %d°,\n " + ...
+    "Облачность:  %d%%\n", ...
+    city, tempC, humidityPct, pressure_mmHg, windSpeed_ms, windDeg, cloudinessPct);

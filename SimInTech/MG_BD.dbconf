@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Header>
+<dbconfig>
+ <dbsettingsplace>`0`</dbsettingsplace>
+ <catfiltercaps></catfiltercaps>
+ <catfiltervals></catfiltervals>
+ <catfilteritemidx>`-1`</catfilteritemidx>
+ <groupfiltercaps></groupfiltercaps>
+ <groupfiltervals></groupfiltervals>
+ <groupfilteritemidx>`-1`</groupfilteritemidx>
+ <signamefiltercaps></signamefiltercaps>
+ <signamefiltervals></signamefiltervals>
+ <signamefilteritemidx>`-1`</signamefilteritemidx>
+ <nameadddescr></nameadddescr>
+ <srvport>`19000`</srvport>
+ <host>`127.0.0.1`</host>
+ <port>`19000`</port>
+ <priority>`0`</priority>
+ <srvenable>`0`</srvenable>
+ <sync>`0`</sync>
+ <remenable>`0`</remenable>
+ <promtbydelete>`1`</promtbydelete>
+ <savedb>`1`</savedb>
+ <savepromt>`1`</savepromt>
+ <multisearch>`0`</multisearch>
+ <adddescr>`1`</adddescr>
+ <allowloadremrestart>`0`</allowloadremrestart>
+ <allowsaveremrestart>`0`</allowsaveremrestart>
+ <allowsaveclientrestart>`1`</allowsaveclientrestart>
+ <restarttemplate>`$PACKRESTARTPATH$RESTARTNAME`</restarttemplate>
+ <notreloadonchangeprj>`0`</notreloadonchangeprj>
+ <recievedatafromsrv>`1`</recievedatafromsrv>
+ <senddatatosrv>`1`</senddatatosrv>
+ <usecommonpackrst>`1`</usecommonpackrst>
+ <asyncdataload>`0`</asyncdataload>
+ <addconsttoexch>`0`</addconsttoexch>
+ <messageifportreplace>`0`</messageifportreplace>
+ <translatecaps>`1`</translatecaps>
+ <translatecatnames>`1`</translatecatnames>
+ <highlightusedsignals>`1`</highlightusedsignals>
+ <catsortcolumn>`-1`</catsortcolumn>
+ <catsortdirection>`0`</catsortdirection>
+ <groupsortcolumn>`-1`</groupsortcolumn>
+ <groupsortdirection>`0`</groupsortdirection>
+ <sigsortcolumn>`-1`</sigsortcolumn>
+ <sigsortdirection>`0`</sigsortdirection>
+ <listsaddoperation>`0`</listsaddoperation>
+ <colwidths>
+  <type>`12`</type>
+  <value>`[90 , 240 , 90 , 60 , 80 , 100 , 110 , 50 , 140]`</value>
+ </colwidths>
+ <formleft>`108`</formleft>
+ <formtop>`237`</formtop>
+ <formright>`1417`</formright>
+ <formbottom>`983`</formbottom>
+ <formstate>`0`</formstate>
+ <formactivemainpage>`0`</formactivemainpage>
+ <formactivepage>`0`</formactivepage>
+ <formvisible>`0`</formvisible>
+</dbconfig>
+</Header>

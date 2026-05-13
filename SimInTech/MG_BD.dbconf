@@ -38,6 +38,7 @@
  <translatecaps>`1`</translatecaps>
  <translatecatnames>`1`</translatecatnames>
  <highlightusedsignals>`1`</highlightusedsignals>
+ <warnsignaloverwriting>`1`</warnsignaloverwriting>
  <catsortcolumn>`-1`</catsortcolumn>
  <catsortdirection>`0`</catsortdirection>
  <groupsortcolumn>`-1`</groupsortcolumn>
@@ -49,10 +50,10 @@
   <type>`12`</type>
   <value>`[90 , 240 , 90 , 60 , 80 , 100 , 110 , 50 , 140]`</value>
  </colwidths>
- <formleft>`108`</formleft>
- <formtop>`237`</formtop>
- <formright>`1417`</formright>
- <formbottom>`983`</formbottom>
+ <formleft>`93`</formleft>
+ <formtop>`687`</formtop>
+ <formright>`1402`</formright>
+ <formbottom>`1433`</formbottom>
  <formstate>`0`</formstate>
  <formactivemainpage>`0`</formactivemainpage>
  <formactivepage>`0`</formactivepage>

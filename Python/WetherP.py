@@ -4,15 +4,10 @@ import time
 import requests
 import json
 import random
-import threading
-import tkinter as tk
-from tkinter import font as tkfont
 
-
-# --- Логика парсинга координат (без изменений) ---
+# --- Логика парсинга координат ---
 def valid_coords(lat, lon):
     return -90.0 <= lat <= 90.0 and -180.0 <= lon <= 180.0
-
 
 def parse_coords(data):
     try:
@@ -48,14 +43,13 @@ def parse_coords(data):
 
 # --- Глобальные переменные настроек ---
 api_key = "3befcfd2478967d4a4d281df93942809"
-current_lat = 55.7558  # Используем глобальные переменные для доступа из потока
+current_lat = 55.7558
 current_lon = 37.6173
 units = "metric"
 lang = "en"
 
 UDP_HOST = "127.0.0.1"
 UDP_PORT = 6501
-
 COORDS_PORT = 6502
 
 # --- Инициализация сокетов ---
@@ -64,51 +58,11 @@ rx_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 rx_sock.bind(("0.0.0.0", COORDS_PORT))
 rx_sock.setblocking(False)
 
-# --- GUI Setup ---
-root = tk.Tk()
-root.title("Weather UDP Monitor")
-root.geometry("400x350")
-root.configure(bg="#2b2b2b")
-
-# Стили шрифтов
-font_large = tkfont.Font(family="Helvetica", size=48, weight="bold")
-font_med = tkfont.Font(family="Helvetica", size=14)
-font_small = tkfont.Font(family="Helvetica", size=10)
-
-# Элементы интерфейса (Labels)
-lbl_city = tk.Label(root, text="Waiting for data...", font=font_med, fg="#ffffff", bg="#2b2b2b")
-lbl_city.pack(pady=(20, 5))
-
-lbl_coords = tk.Label(root, text=f"Lat: {current_lat}, Lon: {current_lon}", font=font_small, fg="#aaaaaa", bg="#2b2b2b")
-lbl_coords.pack(pady=0)
-
-lbl_temp = tk.Label(root, text="--.-°C", font=font_large, fg="#ffcc00", bg="#2b2b2b")
-lbl_temp.pack(pady=20)
-
-lbl_details = tk.Label(root, text="", font=font_med, fg="#dddddd", bg="#2b2b2b", justify="left")
-lbl_details.pack(pady=10)
-
-
-# Функция обновления GUI (вызывается из главного потока через root.after)
-def update_gui_labels(city, lat, lon, temp_c, humidity, pressure, wind_spd, wind_deg, cloudiness):
-    lbl_city.config(text=city)
-    lbl_coords.config(text=f"Lat: {lat:.4f}, Lon: {lon:.4f}")
-    lbl_temp.config(text=f"{temp_c:.1f}°C")
-
-    details_text = (
-        f"Humidity:   {humidity:.0f}%\n"
-        f"Pressure:   {pressure:.0f} mmHg\n"
-        f"Wind:       {wind_spd:.1f} m/s ({wind_deg:.0f}°)\n"
-        f"Cloudiness: {cloudiness:.0f}%"
-    )
-    lbl_details.config(text=details_text)
-
-
-# --- Основной рабочий поток (Weather Logic) ---
-def weather_worker():
+# --- Основной рабочий цикл ---
+def main():
     global current_lat, current_lon
 
-    # Храним последние значения (локально для потока)
+    # Храним последние значения
     last_temp = 20.0
     last_humidity = 50.0
     last_pressure = 1013.0
@@ -154,7 +108,7 @@ def weather_worker():
                 cloudiness_pct = j.get("clouds", {}).get("all", 0)
                 city = j.get("name", "-")
 
-                # обновляем последние значения
+                # Обновляем последние значения
                 last_temp = temp_c
                 last_humidity = humidity_pct
                 last_pressure = pressure_hpa
@@ -166,7 +120,7 @@ def weather_worker():
             except Exception as e:
                 print(f"Weather API error: {e}, using simulated weather")
 
-                # генерируем случайные значения
+                # Генерируем случайные значения
                 temp_c = last_temp + random.uniform(-1.5, 1.5)
                 humidity_pct = max(0, min(100, last_humidity + random.uniform(-5, 5)))
                 pressure_hpa = last_pressure + random.uniform(-2, 2)
@@ -177,7 +131,7 @@ def weather_worker():
 
             pressure_mmhg = pressure_hpa * 0.75006156
 
-            # 3. Вывод в консоль
+            # 3. Вывод в консоль (для Docker logs)
             print(
                 f"{city} (lat={current_lat:.4f}, lon={current_lon:.4f}):\n "
                 f"Temperature: {temp_c:.1f}°C,\n "
@@ -187,13 +141,7 @@ def weather_worker():
                 f"Cloudiness:  {cloudiness_pct:.0f}%"
             )
 
-            # 4. Обновление GUI
-            # Используем root.after, чтобы безопасно обновить интерфейс из потока
-            root.after(0, update_gui_labels,
-                       city, current_lat, current_lon, temp_c,
-                       humidity_pct, pressure_mmhg, wind_speed_ms, wind_deg, cloudiness_pct)
-
-            # 5. Отправка UDP
+            # 4. Отправка UDP
             payload = struct.pack(
                 "<5d",
                 float(temp_c),
@@ -207,18 +155,12 @@ def weather_worker():
             time.sleep(10)
 
         except Exception as e:
-            print(f"Error in worker loop: {e}")
+            print(f"Error in main loop: {e}")
             time.sleep(5)
-
 
 # --- Запуск ---
 if __name__ == "__main__":
-    # Запускаем логику в отдельном потоке (daemon=True, чтобы поток закрылся вместе с окном)
-    t = threading.Thread(target=weather_worker, daemon=True)
-    t.start()
-
-    # Запускаем главный цикл GUI
     try:
-        root.mainloop()
+        main()
     except KeyboardInterrupt:
-        print("Program closed.")
+        print("\nProgram closed.")

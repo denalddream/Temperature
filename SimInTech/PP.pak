@@ -24,8 +24,8 @@ restartname=
 notqueryremoveforall=0
 [Files]
 Count=2
-0=GUI.prt
-1=STest.prt
+0=GUI.xprt
+1=STest.xprt
 [Active]
 0=1
 1=1

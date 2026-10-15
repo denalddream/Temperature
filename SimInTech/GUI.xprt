@@ -967,7 +967,7 @@
  </layers>
  <page>
   <name>`C:\Projects\Git\Temperature\SimInTech\GUI.xprt`</name>
-  <script>`if CheckBox.Value `#62` 0`#13#10`then`#13#10#9`begin `#13#10#9#9`environment_T = Editor.Text`#13#10#9#9`environment_T = Editor.Value`#13#10#9`end`#13#10`else`#13#10#9`begin`#13#10#9#9`Editor.Text = environment_T`#13#10#9#9`Editor.Value = environment_T`#13#10#9`end`#13#10#9</script>
+  <script>`if CheckBox.Value `#62` 0`#13#10`then`#13#10#9`begin `#13#10#9#9`environment_T = Editor.Text`#13#10#9#9`environment_T = Editor.Value`#13#10#9#9`environment_H = Editor2.Text`#13#10#9#9`environment_H = Editor2.Value`#13#10#9#9`environment_Vw = Editor3.Text`#13#10#9#9`environment_Vw = Editor3.Value`#13#10#9#9`environment_Dw = Editor4.Text`#13#10#9#9`environment_Dw = Editor4.Value`#13#10#9#9`environment_P = Editor5.Text`#13#10#9#9`environment_P = Editor5.Value`#13#10#9`end`#13#10`else`#13#10#9`begin`#13#10#9#9`Editor.Text = environment_T`#13#10#9#9`Editor.Value = environment_T`#13#10#9#9`Editor2.Text = environment_H`#13#10#9#9`Editor2.Value = environment_H`#13#10#9#9`Editor3.Text = environment_Vw`#13#10#9#9`Editor3.Value = environment_Vw`#13#10#9#9`Editor4.Text = environment_Dw`#13#10#9#9`Editor4.Value = environment_Dw`#13#10#9#9`Editor5.Text = environment_P`#13#10#9#9`Editor5.Value = environment_P`#13#10#9`end`#13#10#9</script>
   <visible>`1`</visible>
   <x>`52.7340919307625`</x>
   <y>`225.04555862212`</y>
@@ -3191,7 +3191,7 @@
      <type>`0`</type>
      <mode>`2`</mode>
      <value>`77`</value>
-     <textvalue>`environment_H`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>
@@ -3201,7 +3201,7 @@
      <type>`4`</type>
      <mode>`2`</mode>
      <value>`77`</value>
-     <textvalue>`environment_H`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>
@@ -4610,7 +4610,7 @@
      <type>`0`</type>
      <mode>`2`</mode>
      <value>`4.61`</value>
-     <textvalue>`environment_Vw`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>
@@ -4620,7 +4620,7 @@
      <type>`4`</type>
      <mode>`2`</mode>
      <value>`4.61`</value>
-     <textvalue>`environment_Vw`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>
@@ -4896,7 +4896,7 @@
      <type>`0`</type>
      <mode>`2`</mode>
      <value>`266`</value>
-     <textvalue>`environment_Dw`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>
@@ -4906,7 +4906,7 @@
      <type>`4`</type>
      <mode>`2`</mode>
      <value>`266`</value>
-     <textvalue>`environment_Dw`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>
@@ -7286,7 +7286,7 @@
      <type>`0`</type>
      <mode>`2`</mode>
      <value>`900`</value>
-     <textvalue>`environment_P`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>
@@ -7296,7 +7296,7 @@
      <type>`4`</type>
      <mode>`2`</mode>
      <value>`900`</value>
-     <textvalue>`environment_P`</textvalue>
+     <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
     </data>

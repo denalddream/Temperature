@@ -109,7 +109,7 @@
      <caption>`Минимальный шаг`</caption>
      <type>`0`</type>
      <mode>`1`</mode>
-     <value>`0.001`</value>
+     <value>`1`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script>`SECTION Основные параметры`</script>
@@ -119,7 +119,7 @@
      <caption>`Максимальный шаг`</caption>
      <type>`0`</type>
      <mode>`1`</mode>
-     <value>`0.001`</value>
+     <value>`1`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script>`SECTION Основные параметры`</script>
@@ -967,7 +967,7 @@
  </layers>
  <page>
   <name>`C:\Projects\Git\Temperature\SimInTech\GUI.xprt`</name>
-  <script>`if CheckBox.Value `#62` 0`#13#10`then`#13#10#9`begin `#13#10#9#9`environment_T = Editor.Text`#13#10#9#9`environment_T = Editor.Value`#13#10#9#9`environment_H = Editor2.Text`#13#10#9#9`environment_H = Editor2.Value`#13#10#9#9`environment_Vw = Editor3.Text`#13#10#9#9`environment_Vw = Editor3.Value`#13#10#9#9`environment_Dw = Editor4.Text`#13#10#9#9`environment_Dw = Editor4.Value`#13#10#9#9`environment_P = Editor5.Text`#13#10#9#9`environment_P = Editor5.Value`#13#10#9`end`#13#10`else`#13#10#9`begin`#13#10#9#9`Editor.Text = environment_T`#13#10#9#9`Editor.Value = environment_T`#13#10#9#9`Editor2.Text = environment_H`#13#10#9#9`Editor2.Value = environment_H`#13#10#9#9`Editor3.Text = environment_Vw`#13#10#9#9`Editor3.Value = environment_Vw`#13#10#9#9`Editor4.Text = environment_Dw`#13#10#9#9`Editor4.Value = environment_Dw`#13#10#9#9`Editor5.Text = environment_P`#13#10#9#9`Editor5.Value = environment_P`#13#10#9`end`#13#10#9</script>
+  <script>`var M: matrix;`#13#10`var sc_file: string;`#13#10`var n_pts: integer;`#13#10`var cur_t: double;`#13#10#13#10`if CheckBoxFile.Value `#62` 0`#13#10`then`#13#10#9`begin`#13#10#9#9`environment_Control = 1;`#13#10#9#9`sc_file = extractfilepath(current_project_file_name) + "weather_scenario.csv";`#13#10#9#9`if fileexists(sc_file)`#13#10#9#9`then`#13#10#9#9#9`begin`#13#10#9#9#9#9`if firststep`#13#10#9#9#9#9`then`#13#10#9#9#9#9#9`begin`#13#10#9#9#9#9#9#9`M = loadtab(sc_file);`#13#10#9#9#9#9#9`end`#13#10#9#9#9#9`else`#13#10#9#9#9#9#9`begin`#13#10#9#9#9#9#9#9`if cols(M) `#60` 2`#13#10#9#9#9#9#9#9`then`#13#10#9#9#9#9#9#9#9`begin`#13#10#9#9#9#9#9#9#9#9`M = loadtab(sc_file);`#13#10#9#9#9#9#9#9#9`end;`#13#10#9#9#9#9#9`end;`#13#10#9#9#9#9`n_pts = cols(M);`#13#10#9#9#9#9`if n_pts `#62`= 2`#13#10#9#9#9#9`then`#13#10#9#9#9#9#9`begin`#13#10#9#9#9#9#9#9`cur_t = time;`#13#10#9#9#9#9#9#9`if cur_t `#60` M[1, 1] then cur_t = M[1, 1];`#13#10#9#9#9#9#9#9`if cur_t `#62` M[1, n_pts] then cur_t = M[1, n_pts];`#13#10#9#9#9#9#9#9`environment_T = interpol(M[1], M[2], cur_t);`#13#10#9#9#9#9#9#9`environment_H = interpol(M[1], M[3], cur_t);`#13#10#9#9#9#9#9#9`environment_P = interpol(M[1], M[4], cur_t);`#13#10#9#9#9#9#9#9`environment_Vw = interpol(M[1], M[5], cur_t);`#13#10#9#9#9#9#9#9`environment_Dw = interpol(M[1], M[6], cur_t);`#13#10#9#9#9#9#9`end;`#13#10#9#9#9`end;`#13#10#9#9`Editor.Text = environment_T;`#13#10#9#9`Editor.Value = environment_T;`#13#10#9#9`Editor2.Text = environment_H;`#13#10#9#9`Editor2.Value = environment_H;`#13#10#9#9`Editor3.Text = environment_Vw;`#13#10#9#9`Editor3.Value = environment_Vw;`#13#10#9#9`Editor4.Text = environment_Dw;`#13#10#9#9`Editor4.Value = environment_Dw;`#13#10#9#9`Editor5.Text = environment_P;`#13#10#9#9`Editor5.Value = environment_P;`#13#10#9`end`#13#10`else`#13#10#9`begin`#13#10#9#9`if CheckBox.Value `#62` 0`#13#10#9#9`then`#13#10#9#9#9`begin`#13#10#9#9#9#9`environment_Control = 1;`#13#10#9#9#9#9`environment_T = Editor.Text;`#13#10#9#9#9#9`environment_T = Editor.Value;`#13#10#9#9#9#9`environment_H = Editor2.Text;`#13#10#9#9#9#9`environment_H = Editor2.Value;`#13#10#9#9#9#9`environment_Vw = Editor3.Text;`#13#10#9#9#9#9`environment_Vw = Editor3.Value;`#13#10#9#9#9#9`environment_Dw = Editor4.Text;`#13#10#9#9#9#9`environment_Dw = Editor4.Value;`#13#10#9#9#9#9`environment_P = Editor5.Text;`#13#10#9#9#9#9`environment_P = Editor5.Value;`#13#10#9#9#9`end`#13#10#9#9`else`#13#10#9#9#9`begin`#13#10#9#9#9#9`environment_Control = 0;`#13#10#9#9#9#9`Editor.Text = environment_T;`#13#10#9#9#9#9`Editor.Value = environment_T;`#13#10#9#9#9#9`Editor2.Text = environment_H;`#13#10#9#9#9#9`Editor2.Value = environment_H;`#13#10#9#9#9#9`Editor3.Text = environment_Vw;`#13#10#9#9#9#9`Editor3.Value = environment_Vw;`#13#10#9#9#9#9`Editor4.Text = environment_Dw;`#13#10#9#9#9#9`Editor4.Value = environment_Dw;`#13#10#9#9#9#9`Editor5.Text = environment_P;`#13#10#9#9#9#9`Editor5.Value = environment_P;`#13#10#9#9#9`end;`#13#10#9`end;`</script>
   <visible>`1`</visible>
   <x>`52.7340919307625`</x>
   <y>`225.04555862212`</y>
@@ -978,7 +978,7 @@
   <angle>`0`</angle>
   <backcolor>`16777215`</backcolor>
   <transparent>`0`</transparent>
-  <calcany>`0`</calcany>
+  <calcany>`1`</calcany>
   <snap>`1`</snap>
   <snapstep>`8`</snapstep>
   <grid>`1`</grid>
@@ -1521,7 +1521,7 @@
      <caption>`Отображаемое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`900`</value>
+     <value>`2000`</value>
      <textvalue>`environment_P`</textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -2054,7 +2054,7 @@
      <caption>`Отображаемое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`23`</value>
+     <value>`30`</value>
      <textvalue>`environment_T`</textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -2354,7 +2354,7 @@
      <caption>`Числовое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`23`</value>
+     <value>`30`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -2364,7 +2364,7 @@
      <caption>`Текстовoе значение`</caption>
      <type>`4`</type>
      <mode>`2`</mode>
-     <value>`23`</value>
+     <value>`30`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -2940,7 +2940,7 @@
      <caption>`Отображаемое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`77`</value>
+     <value>`100`</value>
      <textvalue>`environment_H`</textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -3190,7 +3190,7 @@
      <caption>`Числовое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`77`</value>
+     <value>`100`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -3200,7 +3200,7 @@
      <caption>`Текстовoе значение`</caption>
      <type>`4`</type>
      <mode>`2`</mode>
-     <value>`77`</value>
+     <value>`100`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -3776,7 +3776,7 @@
      <caption>`Отображаемое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`266`</value>
+     <value>`300`</value>
      <textvalue>`environment_Dw`</textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -4309,7 +4309,7 @@
      <caption>`Отображаемое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`4.61`</value>
+     <value>`100`</value>
      <textvalue>`environment_Vw`</textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -4609,7 +4609,7 @@
      <caption>`Числовое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`4.61`</value>
+     <value>`100`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -4619,7 +4619,7 @@
      <caption>`Текстовoе значение`</caption>
      <type>`4`</type>
      <mode>`2`</mode>
-     <value>`4.61`</value>
+     <value>`100`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -4895,7 +4895,7 @@
      <caption>`Числовое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`266`</value>
+     <value>`300`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -4905,7 +4905,7 @@
      <caption>`Текстовoе значение`</caption>
      <type>`4`</type>
      <mode>`2`</mode>
-     <value>`266`</value>
+     <value>`300`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -5238,6 +5238,295 @@
     </data>
    </visual_props>
    <width>`120`</width>
+   <height>`24`</height>
+  </object>
+  <object>
+   <name>`CheckBoxFile`</name>
+   <class_name>`CheckBox`</class_name>
+   <obj_type>`36`</obj_type>
+   <point_count>`4`</point_count>
+   <visuallayer>`1`</visuallayer>
+   <points>
+    <type>`26`</type>
+    <value>`[(160 , 152),(340 , 152),(160 , 176),(340 , 176)]`</value>
+   </points>
+   <color>`16777215`</color>
+   <visual_props>
+    <data>
+     <name>`Name`</name>
+     <caption>`Имя объекта`</caption>
+     <type>`4`</type>
+     <mode>`2`</mode>
+     <value>`CheckBoxFile`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`ClassName`</name>
+     <caption>`Тип элемента`</caption>
+     <type>`30`</type>
+     <mode>`2`</mode>
+     <value>`CheckBox`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Hint`</name>
+     <caption>`Подсказка`</caption>
+     <type>`8`</type>
+     <mode>`2`</mode>
+     <value></value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`HideHintOnEdit`</name>
+     <caption>`Блокировать подсказку при редактировании`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`0`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Visible`</name>
+     <caption>`Видимость при выполнении`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`1`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Color`</name>
+     <caption>`Цвет`</caption>
+     <type>`3`</type>
+     <mode>`2`</mode>
+     <value>`16777215`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Points`</name>
+     <caption>`Координаты точек`</caption>
+     <type>`26`</type>
+     <mode>`2`</mode>
+     <value>`[(160 , 152),(340 , 152),(160 , 176),(340 , 176)]`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Instance`</name>
+     <caption>`Ссылка`</caption>
+     <type>`29`</type>
+     <mode>`2`</mode>
+     <value></value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`EditInstance`</name>
+     <caption>`Ссылка при редактировании`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`0`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`InstanceMode`</name>
+     <caption>`Действие для вывода ссылки`</caption>
+     <type>`15`</type>
+     <mode>`2`</mode>
+     <value>
+      <items>`Двойной щелчок левой кнопкой`#13`Щелчок левой кнопкой`#13`Щелчок правой кнопкой`#13`Alt+левая кнопка мыши`#13`Alt+правая кнопка мыши`#13`Alt+двойной щелчок левой кнопкой`#13`Shift+двойной щелчок левой кнопкой`</items>
+      <index>`0`</index>
+     </value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Tag`</name>
+     <caption>`Ярлык`</caption>
+     <type>`1`</type>
+     <mode>`2`</mode>
+     <value>`0`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Template`</name>
+     <caption>`Шаблон автозаполнения`</caption>
+     <type>`8`</type>
+     <mode>`2`</mode>
+     <value></value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Layer`</name>
+     <caption>`Номер решателя`</caption>
+     <type>`1`</type>
+     <mode>`2`</mode>
+     <value>`0`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`OnInitScript`</name>
+     <caption>`Скрипт инициализации объекта`</caption>
+     <type>`8`</type>
+     <mode>`2`</mode>
+     <value></value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`OnRunScript`</name>
+     <caption>`Скрипт исполнения объекта`</caption>
+     <type>`8`</type>
+     <mode>`2`</mode>
+     <value></value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`OnDestroyScript`</name>
+     <caption>`Скрипт уничтожения объекта`</caption>
+     <type>`8`</type>
+     <mode>`2`</mode>
+     <value></value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`LockSizes`</name>
+     <caption>`Блокировать изменение размеров`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`0`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`MouseIn`</name>
+     <caption>`Указатель в пределах объекта`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`0`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`NotBringToFrontIfSelected`</name>
+     <caption>`Не переносить на передний план при выделении`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`0`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Width`</name>
+     <caption>`Ширина`</caption>
+     <type>`0`</type>
+     <mode>`2`</mode>
+     <value>`180`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Height`</name>
+     <caption>`Высота`</caption>
+     <type>`0`</type>
+     <mode>`2`</mode>
+     <value>`24`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Caption`</name>
+     <caption>`Заголовок`</caption>
+     <type>`4`</type>
+     <mode>`2`</mode>
+     <value>`Сценарий (CSV файл)`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Font`</name>
+     <caption>`Шрифт`</caption>
+     <type>`7`</type>
+     <mode>`2`</mode>
+     <value>
+      <name>`Cambria`</name>
+      <height>`14`</height>
+      <charset>`1`</charset>
+      <color>`2147483656`</color>
+      <style>`0`</style>
+      <angle>`0`</angle>
+     </value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Ctrl3D`</name>
+     <caption>`Трёхмерность`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`1`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`AlignStyle`</name>
+     <caption>`Положение подписи`</caption>
+     <type>`15`</type>
+     <mode>`2`</mode>
+     <value>
+      <items>`Слева`#13`Справа`</items>
+      <index>`0`</index>
+     </value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+    <data>
+     <name>`Value`</name>
+     <caption>`Значение`</caption>
+     <type>`2`</type>
+     <mode>`2`</mode>
+     <value>`1`</value>
+     <textvalue></textvalue>
+     <fconstant>`0`</fconstant>
+     <script></script>
+    </data>
+   </visual_props>
+   <width>`180`</width>
    <height>`24`</height>
   </object>
   <object>
@@ -7285,7 +7574,7 @@
      <caption>`Числовое значение`</caption>
      <type>`0`</type>
      <mode>`2`</mode>
-     <value>`900`</value>
+     <value>`2000`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -7295,7 +7584,7 @@
      <caption>`Текстовoе значение`</caption>
      <type>`4`</type>
      <mode>`2`</mode>
-     <value>`900`</value>
+     <value>`2000`</value>
      <textvalue></textvalue>
      <fconstant>`0`</fconstant>
      <script></script>
@@ -7346,6 +7635,191 @@
  </page>
 </project>
 <datamanager>
+ <cat>
+  <name>`Графики`</name>
+  <expanded>`0`</expanded>
+  <engine>
+   <engineid>`0`</engineid>
+   <name>`Отображаемое значение (Value) в объекте Voltmeter`</name>
+   <active>`1`</active>
+   <paramlist>
+    <param>
+     <name>`Отображаемое значение (Value) в объекте Voltmeter`</name>
+     <paramname>`Value`</paramname>
+     <blockpath>`Voltmeter`</blockpath>
+    </param>
+   </paramlist>
+   <plot>
+    <maxarchpointcount>`0`</maxarchpointcount>
+    <maxcount>`0`</maxcount>
+    <fmaxpointerscount>`20`</fmaxpointerscount>
+    <period>`0`</period>
+    <decimate>`1`</decimate>
+    <decprecition>`0`</decprecition>
+    <decprecitionmode>`0`</decprecitionmode>
+    <title></title>
+    <titlealign>`2`</titlealign>
+    <titlefont>
+     <type>`7`</type>
+     <value>
+      <name>`Microsoft Sans Serif`</name>
+      <height>`18`</height>
+      <charset>`0`</charset>
+      <color>`0`</color>
+      <style>`0`</style>
+      <angle>`0`</angle>
+     </value>
+    </titlefont>
+    <ftitleposition>`0`</ftitleposition>
+    <copycaption>`0`</copycaption>
+    <framewidth>`1`</framewidth>
+    <framevisible>`0`</framevisible>
+    <framestyle>`0`</framestyle>
+    <framecolor>`8421504`</framecolor>
+    <legend>`1`</legend>
+    <legendstyle>`1`</legendstyle>
+    <legendfont>
+     <type>`7`</type>
+     <value>
+      <name>`Microsoft Sans Serif`</name>
+      <height>`12`</height>
+      <charset>`0`</charset>
+      <color>`0`</color>
+      <style>`0`</style>
+      <angle>`0`</angle>
+     </value>
+    </legendfont>
+    <legendalign>`3`</legendalign>
+    <legendframe>`0`</legendframe>
+    <axisequ>`0`</axisequ>
+    <fmultiaxis>`0`</fmultiaxis>
+    <fdivideaxises>`1`</fdivideaxises>
+    <axisstep>`100`</axisstep>
+    <color>`16777215`</color>
+    <backbmp>
+     <bmp>
+      <type>`6`</type>
+      <value>`00000000`</value>
+     </bmp>
+    </backbmp>
+    <left>`200`</left>
+    <top>`200`</top>
+    <right>`700`</right>
+    <bottom>`700`</bottom>
+    <visible>`0`</visible>
+    <formstyle>`0`</formstyle>
+    <winstate>`0`</winstate>
+    <winborder>`2`</winborder>
+    <series>
+     <series>
+      <title>`Отображаемое значение (Value) в объекте Voltmeter`</title>
+      <titlenotdefault>`0`</titlenotdefault>
+      <serclass>`0`</serclass>
+      <stairs>`0`</stairs>
+      <width>`2`</width>
+      <linevisible>`1`</linevisible>
+      <linestyle>`0`</linestyle>
+      <color>`255`</color>
+      <pointer>`0`</pointer>
+      <pointstyle>`0`</pointstyle>
+      <normtypex>`1`</normtypex>
+      <normtypey>`1`</normtypey>
+      <normmin_x>`0`</normmin_x>
+      <normmax_x>`1`</normmax_x>
+      <normmin_y>`0`</normmin_y>
+      <normmax_y>`1`</normmax_y>
+      <active>`1`</active>
+      <axisindex>`-1`</axisindex>
+     </series>
+    </series>
+    <bottomaxis>
+     <auto>`1`</auto>
+     <min>`0`</min>
+     <max>`0`</max>
+     <interval>`0`</interval>
+     <visible>`1`</visible>
+     <log>`0`</log>
+     <inverted>`0`</inverted>
+     <function>`0`</function>
+     <tmmode>`0`</tmmode>
+     <title>`Время t, c`</title>
+     <titlefont>
+      <type>`7`</type>
+      <value>
+       <name>`Microsoft Sans Serif`</name>
+       <height>`12`</height>
+       <charset>`0`</charset>
+       <color>`0`</color>
+       <style>`0`</style>
+       <angle>`0`</angle>
+      </value>
+     </titlefont>
+     <format>`#,##0.###`</format>
+     <labelsfont>
+      <type>`7`</type>
+      <value>
+       <name>`Microsoft Sans Serif`</name>
+       <height>`10`</height>
+       <charset>`0`</charset>
+       <color>`0`</color>
+       <style>`0`</style>
+       <angle>`0`</angle>
+      </value>
+     </labelsfont>
+     <increment>`0`</increment>
+     <width>`1`</width>
+     <grid>`1`</grid>
+     <gridstyle>`0`</gridstyle>
+     <color>`12632256`</color>
+    </bottomaxis>
+    <leftaxis>
+     <auto>`1`</auto>
+     <min>`0`</min>
+     <max>`0`</max>
+     <interval>`0`</interval>
+     <visible>`1`</visible>
+     <log>`0`</log>
+     <inverted>`0`</inverted>
+     <function>`0`</function>
+     <tmmode>`0`</tmmode>
+     <title>`Значение y(t)`</title>
+     <titlefont>
+      <type>`7`</type>
+      <value>
+       <name>`Microsoft Sans Serif`</name>
+       <height>`12`</height>
+       <charset>`0`</charset>
+       <color>`0`</color>
+       <style>`0`</style>
+       <angle>`0`</angle>
+      </value>
+     </titlefont>
+     <format>`#,##0.###`</format>
+     <labelsfont>
+      <type>`7`</type>
+      <value>
+       <name>`Microsoft Sans Serif`</name>
+       <height>`10`</height>
+       <charset>`0`</charset>
+       <color>`0`</color>
+       <style>`0`</style>
+       <angle>`0`</angle>
+      </value>
+     </labelsfont>
+     <increment>`0`</increment>
+     <width>`1`</width>
+     <grid>`1`</grid>
+     <gridstyle>`0`</gridstyle>
+     <color>`12632256`</color>
+    </leftaxis>
+    <axes>
+    </axes>
+    <plugins>
+    </plugins>
+   </plot>
+   <expanded>`0`</expanded>
+  </engine>
+ </cat>
  <visible>`0`</visible>
  <left>`0`</left>
  <right>`0`</right>
